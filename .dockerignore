@@ -1,0 +1,15 @@
+.firebase
+
+.github
+
+**/node_modules
+**/node_modules/**
+**/.git
+**/.DS_Store
+
+**/node_modules
+**/dist
+
+.env*
+
+**/README.md

@@ -1,0 +1,24 @@
+{
+  "name": "cs3219-ay2425s1-project-g20",
+  "version": "1.0.0",
+  "description": "",
+  "workspaces": [
+    "frontend",
+    "services/*",
+    "common/*"
+  ],
+  "scripts": {
+    "dev:frontend": "pnpm -F frontend dev",
+    "dev:question-service": "pnpm -F @services/question-service dev",
+    "dev:user-service": "pnpm -F @services/user-service dev",
+    "dev": "pnpm run --stream /dev:.*/",
+    "build:frontend": "pnpm -F frontend build",
+    "build": "pnpm run --stream /build:.*/",
+    "build:services": "pnpm run -F @services/* build",
+    "build:common": "pnpm run -F @common/* build"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "packageManager": "pnpm@9.12.0"
+}

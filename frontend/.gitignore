@@ -1,0 +1,14 @@
+# Local
+.DS_Store
+*.local
+*.log*
+
+# Dist
+.vinxi
+.output
+.vercel
+.netlify
+.wrangler
+
+# IDE
+.idea
