@@ -1,10 +1,4 @@
-import dotenv from 'dotenv'
-if (process.env.NODE_ENV) {
-  dotenv.config({ path: `.env.${process.env.NODE_ENV}` })
-} else {
-  dotenv.config({ path: '.env' })
-}
-import { User, extractedUserSchema, ExtractedUser } from '@common/shared-types'
+import { ExtractedUser, User, extractedUserSchema } from '@common/shared-types'
 import axios, { AxiosResponse } from 'axios'
 import { NextFunction, Request, Response } from 'express'
 import { StatusCodes } from 'http-status-codes'

@@ -1,6 +1,4 @@
 # Local
-.DS_Store
-*.local
 *.log*
 
 # Dist
@@ -9,6 +7,3 @@
 .vercel
 .netlify
 .wrangler
-
-# IDE
-.idea

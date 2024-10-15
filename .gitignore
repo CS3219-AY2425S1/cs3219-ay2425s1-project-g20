@@ -1,8 +1,10 @@
-**/node_modules
-**/dist
+**/.env.local
+**/.env.*.local
+**/.firebase/*.json
 
-**/.vscode/*
-!**/.vscode/extensions.json
+**/node_modules/
+**/dist/
 
-.env
-.firebase/*.json
+**/.DS_Store
+**/.vscode/
+**/.idea/

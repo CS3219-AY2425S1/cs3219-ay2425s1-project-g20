@@ -1,32 +1,22 @@
-## Getting Started
+# Frontend
 
-### Prerequisites
+## Development Instructions
 
-- npm
-  ```sh
-  npm install npm@latest -g
-  ```
+Unless otherwise specified, commands should be run in the service root.
 
-### Installation
+### Running the service (development)
 
-1. Clone the repo
-   ```sh
-   git clone git@github.com:CS3219-AY2425S1/cs3219-ay2425s1-project-g20.git
-   ```
-2. Install NPM packages
-   ```sh
-   npm install
-   ```
-3. Start the local development server
-   ```sh
-   npm run dev
-   ```
+1. Run `npm run dev` to run the dev script.
+1. Open your browser at <http://localhost:3000>.
+
+## Documentation
 
 ### Environment Variables
 
-Set variables in .env.development for development and .env.prod for production.
+`.env`:
 
--`VITE_QUESTION_SERVICE_API_URL`: The backend API url (e.g. http://localhost:3001) -`VITE_USER_SERVICE_API_URL`: The backend API url (e.g. http://localhost:3002)
+- `VITE_QUESTION_SERVICE_API_URL`: The URL to the question service.
+- `VITE_USER_SERVICE_API_URL`: The URL to the user service.
 
-For more details on how .env in VITE works:
-https://vitejs.dev/guide/env-and-mode
+For more details on how `.env` works in Vite:
+<https://vitejs.dev/guide/env-and-mode>
