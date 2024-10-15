@@ -1,0 +1,57 @@
+{
+  "name": "@services/matching-service",
+  "version": "1.0.0",
+  "main": "src/index.ts",
+  "scripts": {
+    "dev": "cross-env NODE_ENV=development ts-node-dev --respawn --transpile-only src/index.ts",
+    "build": "tsc --project .",
+    "test": "cross-env NODE_ENV=test jest",
+    "start": "NODE_ENV=production node dist/index.js"
+  },
+  "keywords": [],
+  "files": [
+    "dist"
+  ],
+  "author": "Bach Le Tuan Khai",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@types/cors": "^2.8.17",
+    "@types/express": "^4.17.21",
+    "@types/jest": "^29.5.13",
+    "jest": "^29.7.0",
+    "ts-node": "^10.9.2",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.6.2"
+  },
+  "dependencies": {
+    "bullmq": "^5.19.1",
+    "cors": "^2.8.5",
+    "cross-env": "^7.0.3",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.0",
+    "firebase-admin": "^12.5.0",
+    "redis": "^4.7.0",
+    "socket.io": "^4.8.0",
+    "winston": "^3.14.2"
+  },
+  "prettier": {
+    "arrowParens": "always",
+    "bracketSpacing": true,
+    "endOfLine": "lf",
+    "printWidth": 90,
+    "htmlWhitespaceSensitivity": "css",
+    "insertPragma": false,
+    "singleAttributePerLine": false,
+    "tabWidth": 2,
+    "jsxSingleQuote": false,
+    "proseWrap": "preserve",
+    "quoteProps": "as-needed",
+    "requirePragma": false,
+    "semi": false,
+    "singleQuote": true,
+    "trailingComma": "es5",
+    "useTabs": false,
+    "parser": "typescript"
+  }
+}
