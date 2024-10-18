@@ -37,14 +37,14 @@ collective work and technical decisions made by the team.
 - Explain how your design, development, and/or deployment choices impact the NFR you are
   targeting.
 - Nice-to-haves
-  o Similar details as above are expected for each of the selected/implemented nice-to-
-  haves.
+  - Similar details as above are expected for each of the selected/implemented nice-to-
+    haves.
 
 ### Design: Internal microservice design
 
 - Document the internal design of at least two microservices.
 - Include labeled/annotated design diagram(s) and brief descriptions.
-  Project plan
+- Project plan
 - Present a project plan using a Gantt chart or equivalent, organizing tasks based on technical
   milestones. For example, developing, integrating, and deploying a microservice in the project
   timeline.

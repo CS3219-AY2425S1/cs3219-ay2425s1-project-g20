@@ -62,23 +62,67 @@ We, the undersigned, declare that:
 
 ## Functional Requirements (+ Fulfillment)
 
-| **Functional Requirements** | **Priority** | **Planned sprint/iteration** | **PR**                   |
-| --------------------------- | ------------ | ---------------------------- | ------------------------ |
-| F1: FR                      |              |                              |                          |
-| ... &lt;refinement&gt;      |              |                              |                          |
-| ...                         |              |                              | \[Link to PR or Commit\] |
-|                             |              |                              |                          |
-
-\* Expand the table as necessary
+| FR                                                                                                                                    | Priority | Sprint | PR  |
+| ------------------------------------------------------------------------------------------------------------------------------------- | -------- | ------ | --- |
+| **M1: User Service** - responsible for user profile management                                                                        |          |        |     |
+| **F1.1 User Authentication**                                                                                                          |          |        |     |
+| F1.1.1 The system should enable registration with a unique username and password                                                      | H        | 2      |     |
+| F1.1.2 The system should only enable user log in to a registered account with the correct                                             | H        | 2      |     |
+| credentials (username and password)                                                                                                   |          |        |     |
+| F1.1.3 The system should enable users to log out of their accounts                                                                    | H        | 2      |     |
+| **F1.2 User Account Management**                                                                                                      |          |        |     |
+| F1.2.1 The system should enable users to update their username and password                                                           | M        | 2      |     |
+| F1.2.2 The system should enable users to delete their accounts                                                                        | L        | 2      |     |
+| **M2: Matching Service** - responsible for matching users                                                                             |          |        |     |
+| **F2.1 Pre-matching**                                                                                                                 |          |        |     |
+| F2.1.1 The system should enable users to select the question difficulty level AND topic they                                          | H        | 3      |     |
+| want to attempt                                                                                                                       |          |        |     |
+| F2.1.2 The system should enable users to join a queue for matching                                                                    | H        | 3      |     |
+| **F2.2 Matching Process**                                                                                                             |          |        |     |
+| F2.2.1 The system should be able to match 2 users in the queue that selected similar question                                         | H        | 3      |     |
+| difficulty level and topic                                                                                                            |          |        |     |
+| F2.2.2 The system should enable users to voluntarily exit the matching process before a match                                         | H        | 3      |     |
+| has been found                                                                                                                        |          |        |     |
+| F2.2.3 The system should timeout and notify the user if a match is unable to be found                                                 | M        | 3      |     |
+| **M3: Question Service** - responsible for managing a question repository indexed by difficulty                                       |          |        |     |
+| level                                                                                                                                 |          |        |     |
+| **F3.1 Question Management**                                                                                                          |          |        |     |
+| F3.1.1 The system should allow CRUD operations to maintain a list of questions with different                                         | H        | 1      |     |
+| difficulty levels and topics                                                                                                          |          |        |     |
+| F3.1.2 The system should enable users to select the topics and difficulty levels dynamically                                          | H        | 1      |     |
+| based on the existing questions                                                                                                       |          |        |     |
+| **F3.2 Questions Retrieval**                                                                                                          |          |        |     |
+| F3.2.1 The system should be able to retrieve questions from database to display the question                                          | H        | 4      |     |
+| for users                                                                                                                             |          |        |     |
+| **M4: Collaboration Service** - provides the mechanism for real-time collaboration                                                    |          |        |     |
+| **F4.1 Collaborative Space**                                                                                                          |          |        |     |
+| F4.1.1 The system should be able to display matched users in an isolated collaborative space                                          | H        | 4      |     |
+| with the provided question                                                                                                            |          |        |     |
+| F4.1.2 The system should provide a real-time coding editor where matched users can edit the                                           | H        | 4      |     |
+| same code together                                                                                                                    |          |        |     |
+| **F4.2 Session Management**                                                                                                           |          |        |     |
+| F4.2.1 The system should start a session immediately when a match is found                                                            | H        | 4      |     |
+| F4.2.2 The system should enable users to end and leave the collaborative session voluntarily                                          | H        | 4      |     |
+| F4.2.3 The system should be able to detect inactivity from either matched users and terminate the session via a timeout appropriately | L        | 4      |     |
 
 ## Non-Functional Requirements (+ Fulfillment)
 
-| **Non-Functional Requirements** | **Priority** | **Planned sprint/iteration** | **PR** |
-| ------------------------------- | ------------ | ---------------------------- | ------ |
-| N1: NFR                         |              |                              |        |
-| ... &lt;refinement&gt;          |              |                              |        |
-| ...                             |              |                              |        |
-| ...                             |              |                              |        |
+| NFR                                                                                                 | Priority | Sprint | PR  |
+| --------------------------------------------------------------------------------------------------- | -------- | ------ | --- |
+| **NF1.1 Security**                                                                                  |          |        |     |
+| NF1.1.1 User passwords must be appropriately stored and securely encrypted                          | H        | 1      |     |
+| **NF1.2 Performance**                                                                               |          |        |     |
+| NF1.2.1 Frontend actions that interact with the backend should have minimal delay (< 3 seconds)     | M        | 1      |     |
+| NF1.2.2 The system should be able to match users within 30 seconds when there are sufficient users  | H        | 4      |     |
+| in the queue                                                                                        |          |        |     |
+| **NF1.3 Latency**                                                                                   |          |        |     |
+| NF1.3.1 The system should have minimal delay in displaying real-time updates in the collaboration   | H        | 4      |     |
+| space (<200ms)                                                                                      |          |        |     |
+| **NF1.4 Cross browser compatibility**                                                               |          |        |     |
+| NF1.4.1 The system should support major browsers such as Google Chrome, Firefox, Safari, Microsoft  | H        | 4      |     |
+| Edge                                                                                                |          |        |     |
+| **NF1.5 Scalability**                                                                               |          |        |     |
+| NF1.5 The services should be deployed in containers using Docker for ease of management and scaling | H        | 4      |     |
 
 \* Expand the table as necessary
 
@@ -86,7 +130,49 @@ We, the undersigned, declare that:
 
 Use similar table structure as above, or any other format.
 
-...
+- **N1 - Communication**:
+
+  - Implement a mechanism to facilitate communication among the participants in the collaborative space.
+  - Add in-session real-time text chat to enable matched users to communicate during collaboration.
+
+- **N2 - History**:
+
+  - Maintain a record of the questions attempted by the user, e.g., maintain a list of questions attempted along with the
+    date-time of attempt, the attempt itself, and/or suggested solutions.
+  - Possible information to log:
+    - Question ID (to get details from the questions service; suggested solutions are also included),
+    - Timestamps (e.g. start/end of session),
+    - Snapshots (e.g. collaboration content history with its own timestamps).
+  - History would be its own service, with a dedicated frontend page in **M5**.
+  - Data would be periodically updated in history while the session is live and can later be retrieved as needed.
+
+- **N3 - Code execution**:
+
+  - Implement a mechanism to execute attempted solutions/code in a sandboxed environment and retrieve and present the
+    results in the collaborative workspace.
+    - Allow only one or two languages to be executed.
+
+- **N4 - Enhanced collaboration**:
+
+  - Enhance the collaboration service by providing an improved code editor with features such as code formatting, syntax
+    highlighting for one language, and syntax highlighting for multiple languages.
+  - The user will be able to choose the language they want to use.
+  - Syntax highlighting will adjust according to the selected language. When switching languages, the code written in the
+    previous language will be cleared.
+
+- **N9 - API Gateway**:
+
+  - The application should have an API gateway that redirects requests to the relevant microservices.
+  - Example: Using an ingress controller such as NGINX ingress controller if using Kubernetes
+    (https://kubernetes.GitHub.io/ingress-nginx/).
+  - The application should route services accordingly (e.g., questions-related queries should go to the question
+    microservice).
+  - The application should balance the load of API requests across the backend services.
+
+- **N7 - Deployment**:
+  - Deploy the app on a production system (AWS/GCP cloud platform).
+  - The application should be publicly accessible on the Internet.
+  - Application data should be consistent and persisted in the production environment.
 
 ## Design
 
