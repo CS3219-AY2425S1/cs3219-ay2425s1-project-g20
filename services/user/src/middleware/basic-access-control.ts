@@ -1,13 +1,7 @@
-import dotenv from 'dotenv'
-if (process.env.NODE_ENV) {
-  dotenv.config({ path: `.env.${process.env.NODE_ENV}` })
-} else {
-  dotenv.config({ path: '.env' })
-}
-import { Response, Request, NextFunction } from 'express'
+import { ExtractedUser, User } from '@common/shared-types'
+import { NextFunction, Request, Response } from 'express'
 import jwt, { JwtPayload } from 'jsonwebtoken'
 import { db } from '../db/clients'
-import { User, ExtractedUser } from '@common/shared-types'
 import { jwtSecret } from '../utils/jwt-secret'
 
 interface VerifyRequest extends Request {

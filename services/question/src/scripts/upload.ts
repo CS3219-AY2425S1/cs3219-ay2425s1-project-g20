@@ -1,9 +1,5 @@
-import dotenv from 'dotenv'
-if (process.env.NODE_ENV) {
-  dotenv.config({ path: `.env.${process.env.NODE_ENV}` })
-} else {
-  dotenv.config({ path: '.env' })
-}
+import { configEnv } from '@common/utils'
+configEnv()
 
 import { Question } from "@common/shared-types"
 import fs from 'fs/promises'

@@ -1,15 +1,20 @@
-.firebase
+**/*.md
+**/.dockerignore
+**/.gitignore
+**/docker-compose.yml
+**/Dockerfile
+**/LICENSE
+services/question/data/questions.json
 
-.github
+**/.env
+**/.env.*
+**/.firebase/
+**/.github/
+**/.git/
 
-**/node_modules
-**/node_modules/**
-**/.git
+**/node_modules/
+**/dist/
+
 **/.DS_Store
-
-**/node_modules
-**/dist
-
-.env*
-
-**/README.md
+**/.vscode/
+**/.idea/

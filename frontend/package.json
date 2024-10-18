@@ -7,8 +7,7 @@
     "typecheck": "tsc --noEmit",
     "dev": "vite --port=3000",
     "build": "vite build",
-    "serve": "vite preview",
-    "start": "vite"
+    "start": "vite preview"
   },
   "devDependencies": {
     "@tanstack/router-devtools": "^1.57.15",

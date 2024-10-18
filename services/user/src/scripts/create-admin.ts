@@ -1,11 +1,8 @@
-import dotenv from 'dotenv'
-if (process.env.NODE_ENV) {
-  dotenv.config({ path: `.env.${process.env.NODE_ENV}` })
-} else {
-  dotenv.config({ path: '.env' })
-}
-import { db } from '../db/clients'
+import { configEnv } from '@common/utils'
+configEnv()
+
 import bcrypt from 'bcrypt'
+import { db } from '../db/clients'
 
 const createAdminUser = async () => {
   const salt = bcrypt.genSaltSync(10)

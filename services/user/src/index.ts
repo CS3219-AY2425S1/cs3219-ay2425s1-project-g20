@@ -1,14 +1,13 @@
+import { configEnv } from '@common/utils'
+configEnv()
+
 import cors from 'cors'
-import dotenv from 'dotenv'
 import express, { NextFunction, Request, Response } from 'express'
 import authRoutes from './routes/auth-routes'
 import userRoutes from './routes/user-routes'
 import logger from './utils/logger'
-if (process.env.NODE_ENV) {
-  dotenv.config({ path: `.env.${process.env.NODE_ENV}` })
-} else {
-  dotenv.config({ path: '.env' })
-}
+
+/* [Main] */
 
 // Custom Error Interface to add status property
 interface CustomError extends Error {
