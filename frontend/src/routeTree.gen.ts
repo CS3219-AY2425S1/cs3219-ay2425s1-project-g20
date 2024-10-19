@@ -17,6 +17,7 @@ import { Route as AuthenticatedImport } from './routes/_authenticated'
 import { Route as AuthenticatedIndexImport } from './routes/_authenticated/index'
 import { Route as AuthenticatedQuestionsImport } from './routes/_authenticated/questions'
 import { Route as AuthenticatedMatchingImport } from './routes/_authenticated/matching'
+import { Route as AuthenticatedCollaborationImport } from './routes/_authenticated/collaboration'
 
 // Create/Update Routes
 
@@ -50,6 +51,13 @@ const AuthenticatedMatchingRoute = AuthenticatedMatchingImport.update({
   getParentRoute: () => AuthenticatedRoute,
 } as any)
 
+const AuthenticatedCollaborationRoute = AuthenticatedCollaborationImport.update(
+  {
+    path: '/collaboration',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any,
+)
+
 // Populate the FileRoutesByPath interface
 
 declare module '@tanstack/react-router' {
@@ -74,6 +82,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/signup'
       preLoaderRoute: typeof SignupImport
       parentRoute: typeof rootRoute
+    }
+    '/_authenticated/collaboration': {
+      id: '/_authenticated/collaboration'
+      path: '/collaboration'
+      fullPath: '/collaboration'
+      preLoaderRoute: typeof AuthenticatedCollaborationImport
+      parentRoute: typeof AuthenticatedImport
     }
     '/_authenticated/matching': {
       id: '/_authenticated/matching'
@@ -102,12 +117,14 @@ declare module '@tanstack/react-router' {
 // Create and export the route tree
 
 interface AuthenticatedRouteChildren {
+  AuthenticatedCollaborationRoute: typeof AuthenticatedCollaborationRoute
   AuthenticatedMatchingRoute: typeof AuthenticatedMatchingRoute
   AuthenticatedQuestionsRoute: typeof AuthenticatedQuestionsRoute
   AuthenticatedIndexRoute: typeof AuthenticatedIndexRoute
 }
 
 const AuthenticatedRouteChildren: AuthenticatedRouteChildren = {
+  AuthenticatedCollaborationRoute: AuthenticatedCollaborationRoute,
   AuthenticatedMatchingRoute: AuthenticatedMatchingRoute,
   AuthenticatedQuestionsRoute: AuthenticatedQuestionsRoute,
   AuthenticatedIndexRoute: AuthenticatedIndexRoute,
@@ -121,6 +138,7 @@ export interface FileRoutesByFullPath {
   '': typeof AuthenticatedRouteWithChildren
   '/login': typeof LoginRoute
   '/signup': typeof SignupRoute
+  '/collaboration': typeof AuthenticatedCollaborationRoute
   '/matching': typeof AuthenticatedMatchingRoute
   '/questions': typeof AuthenticatedQuestionsRoute
   '/': typeof AuthenticatedIndexRoute
@@ -129,6 +147,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/login': typeof LoginRoute
   '/signup': typeof SignupRoute
+  '/collaboration': typeof AuthenticatedCollaborationRoute
   '/matching': typeof AuthenticatedMatchingRoute
   '/questions': typeof AuthenticatedQuestionsRoute
   '/': typeof AuthenticatedIndexRoute
@@ -139,6 +158,7 @@ export interface FileRoutesById {
   '/_authenticated': typeof AuthenticatedRouteWithChildren
   '/login': typeof LoginRoute
   '/signup': typeof SignupRoute
+  '/_authenticated/collaboration': typeof AuthenticatedCollaborationRoute
   '/_authenticated/matching': typeof AuthenticatedMatchingRoute
   '/_authenticated/questions': typeof AuthenticatedQuestionsRoute
   '/_authenticated/': typeof AuthenticatedIndexRoute
@@ -146,14 +166,22 @@ export interface FileRoutesById {
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '' | '/login' | '/signup' | '/matching' | '/questions' | '/'
+  fullPaths:
+    | ''
+    | '/login'
+    | '/signup'
+    | '/collaboration'
+    | '/matching'
+    | '/questions'
+    | '/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/login' | '/signup' | '/matching' | '/questions' | '/'
+  to: '/login' | '/signup' | '/collaboration' | '/matching' | '/questions' | '/'
   id:
     | '__root__'
     | '/_authenticated'
     | '/login'
     | '/signup'
+    | '/_authenticated/collaboration'
     | '/_authenticated/matching'
     | '/_authenticated/questions'
     | '/_authenticated/'
@@ -192,6 +220,7 @@ export const routeTree = rootRoute
     "/_authenticated": {
       "filePath": "_authenticated.tsx",
       "children": [
+        "/_authenticated/collaboration",
         "/_authenticated/matching",
         "/_authenticated/questions",
         "/_authenticated/"
@@ -202,6 +231,10 @@ export const routeTree = rootRoute
     },
     "/signup": {
       "filePath": "signup.tsx"
+    },
+    "/_authenticated/collaboration": {
+      "filePath": "_authenticated/collaboration.tsx",
+      "parent": "/_authenticated"
     },
     "/_authenticated/matching": {
       "filePath": "_authenticated/matching.tsx",
