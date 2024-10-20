@@ -1,0 +1,10 @@
+**/.env.local
+**/.env.*.local
+**/.firebase/*.json
+
+**/node_modules/
+**/dist/
+
+**/.DS_Store
+**/.vscode/
+**/.idea/

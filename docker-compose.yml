@@ -1,0 +1,84 @@
+services:
+  question-service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: question-service
+    environment:
+      GOOGLE_APPLICATION_CREDENTIALS: /run/secrets/gcp_credentials.json
+      USER_SERVICE_URL: http://user-service:3002
+      PORT: 3001
+    secrets:
+      - gcp_credentials.json
+    ports:
+      - 3001:3001
+    expose:
+      - 3001
+    networks:
+      - demo-network
+    
+  user-service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: user-service
+    environment:
+      GOOGLE_APPLICATION_CREDENTIALS: /run/secrets/gcp_credentials.json
+      JWT_SECRET_PATH: /run/secrets/jwt_secret
+      PORT: 3002
+    secrets:
+      - gcp_credentials.json
+      - jwt_secret
+    ports:
+      - 3002:3002
+    expose:
+      - 3002
+    networks:
+      - demo-network
+
+  redis:
+    image: redis:alpine
+    healthcheck:
+      test: ["CMD-SHELL", "redis-cli ping | grep PONG"]
+      interval: 1s
+      timeout: 3s
+      retries: 5
+    ports:
+      - 6379:6379
+    expose:
+      - 6379
+    networks:
+      - demo-network
+
+  matching-service:
+    depends_on:
+      redis:
+        condition: service_healthy
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: matching-service
+    environment:
+      GOOGLE_APPLICATION_CREDENTIALS: /run/secrets/gcp_credentials.json
+      PORT: 3003
+      REDIS_URL: redis://redis:6379
+      USER_SERVICE_URL: http://user-service:3002
+    secrets:
+      - gcp_credentials.json
+    ports:
+      - 3003:3003
+    expose:
+      - 3003
+    networks:
+      - demo-network
+
+networks:
+  demo-network:
+    driver: bridge
+
+secrets:
+  gcp_credentials.json:
+    file: ./.firebase/service-account.json
+  jwt_secret:
+    file: ./jwt_secret.txt
+    
