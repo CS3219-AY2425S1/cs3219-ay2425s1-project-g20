@@ -1,0 +1,169 @@
+services:
+  question-service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: question-service
+    environment:
+      PORT: 3001
+      USER_SERVICE_URL: http://user-service:3002
+      GOOGLE_APPLICATION_CREDENTIALS: /run/secrets/gcp_creds_question.json
+      SERVICE_API_KEY_PATH: /run/secrets/service_api_key
+    secrets:
+      - gcp_creds_question.json
+      - service_api_key
+    ports:
+      - 3001:3001
+    expose:
+      - 3001
+    networks:
+      - demo-network
+
+  user-service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: user-service
+    environment:
+      PORT: 3002
+      GOOGLE_APPLICATION_CREDENTIALS: /run/secrets/gcp_creds_user.json
+      JWT_SECRET_PATH: /run/secrets/jwt_secret
+      SERVICE_API_KEY_PATH: /run/secrets/service_api_key
+    secrets:
+      - gcp_creds_user.json
+      - service_api_key
+      - jwt_secret
+    ports:
+      - 3002:3002
+    expose:
+      - 3002
+    networks:
+      - demo-network
+
+  redis:
+    image: redis:alpine
+    healthcheck:
+      test: ['CMD-SHELL', 'redis-cli ping | grep PONG']
+      interval: 1s
+      timeout: 3s
+      retries: 5
+    ports:
+      - 6379:6379
+    expose:
+      - 6379
+    networks:
+      - demo-network
+
+  matching-service:
+    depends_on:
+      redis:
+        condition: service_healthy
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: matching-service
+    environment:
+      PORT: 3003
+      REDIS_URL: redis://redis:6379
+      USER_SERVICE_URL: http://user-service:3002
+      COLLABORATION_SERVICE_URL: http://collaboration-service:3004
+      SERVICE_API_KEY_PATH: /run/secrets/service_api_key
+    secrets:
+      - service_api_key
+    ports:
+      - 3003:3003
+    expose:
+      - 3003
+    networks:
+      - demo-network
+
+  collaboration-service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: collaboration-service
+    environment:
+      GOOGLE_APPLICATION_CREDENTIALS: /run/secrets/gcp_creds_collaboration.json
+      SERVICE_API_KEY_PATH: /run/secrets/service_api_key
+      QUESTION_SERVICE_URL: http://question-service:3001
+      USER_SERVICE_URL: http://user-service:3002
+      PORT: 3004
+    secrets:
+      - gcp_creds_collaboration.json
+      - service_api_key
+    ports:
+      - 3004:3004
+    expose:
+      - 3004
+    networks:
+      - demo-network
+
+  chat-service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: chat-service
+    environment:
+      PORT: 3005
+    ports:
+      - 3005:3005
+    expose:
+      - 3005
+    networks:
+      - demo-network
+
+  ai-service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: ai-service
+    environment:
+      USER_SERVICE_URL: http://user-service:3002
+      GOOGLE_AI_API_KEY_PATH: /run/secrets/google_ai_api_key
+      PORT: 3007
+    secrets:
+      - google_ai_api_key
+    ports:
+      - 3007:3007
+    expose:
+      - 3007
+    networks:
+      - demo-network
+
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: frontend
+      args:
+        VITE_QUESTION_SERVICE_API_URL: http://localhost:3001
+        VITE_USER_SERVICE_API_URL: http://localhost:3002
+        VITE_MATCH_SERVICE_API_URL: ws://localhost:3003
+        VITE_COLLABORATION_SERVICE_WS_URL: ws://localhost:3004
+        VITE_COLLABORATION_SERVICE_API_URL: http://localhost:3004
+        VITE_CHAT_SERVICE_WS_URL: ws://localhost:3005
+        VITE_AI_SERVICE_API_URL: http://localhost:3007
+    ports:
+      - 3000:3000
+    expose:
+      - 3000
+    networks:
+      - demo-network
+
+networks:
+  demo-network:
+    driver: bridge
+
+secrets:
+  gcp_creds_collaboration.json:
+    file: ./.firebase/collaboration/service-account.json
+  gcp_creds_question.json:
+    file: ./.firebase/question/service-account.json
+  gcp_creds_user.json:
+    file: ./.firebase/user/service-account.json
+  jwt_secret:
+    file: ./jwt_secret.txt
+  service_api_key:
+    file: ./service_api_key.txt
+  google_ai_api_key:
+    file: ./google_ai_api_key.txt

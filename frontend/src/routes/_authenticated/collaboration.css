@@ -1,0 +1,12 @@
+.copilotKitWindow {
+  min-width: 28vw;
+}
+
+.copilotKitCodeBlockToolbarButtons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.copilotKitCodeBlockToolbarButton {
+  width: 100%;
+}

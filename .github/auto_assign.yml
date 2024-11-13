@@ -1,0 +1,38 @@
+# https://probot.github.io/apps/auto-assign/
+
+
+
+# Set to true to add reviewers to PRs
+addReviewers: true
+
+# List of reviewers to add to PRs (GitHub username)
+reviewers:
+  - Cloud7050
+  - asaierika
+  - bachletuankhai
+  - donljh
+  - ys112
+
+# Number of reviewers to randomly add to PRs.
+# Set 0 to add all reviewers.
+# Defaults to 0
+# numberOfReviewers: 0
+
+# Set to true to add assignees to PRs
+# addAssignees: true
+
+# List of assignees to add to PRs (GitHub username).
+# Presumably takes priority over reviewers, for usernames set in both
+# assignees:
+#   - assigneeA
+#   - assigneeB
+#   - assigneeC
+
+# Number of assignees to randomly add to PRs.
+# Set to 0 to add all assignees.
+# Defaults to numberOfReviewers
+# numberOfAssignees: 0
+
+# Keywords used to decide whether to skip all adding for a PR
+skipKeywords:
+  - no-assign

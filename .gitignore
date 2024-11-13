@@ -1,0 +1,13 @@
+**/.env.local
+**/.env.*.local
+**/.firebase/**/*.json
+jwt_secret.txt
+service_api_key.txt
+google_ai_api_key.txt
+
+**/node_modules/
+**/dist/
+
+**/.DS_Store
+**/.vscode/
+**/.idea/

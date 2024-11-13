@@ -1,0 +1,60 @@
+{
+  "name": "@services/user-service",
+  "version": "1.0.0",
+  "main": "src/index.ts",
+  "scripts": {
+    "dev": "cross-env NODE_ENV=development ts-node-dev --respawn --transpile-only src/index.ts",
+    "build": "tsc --project .",
+    "start": "NODE_ENV=production node dist/index.js",
+    "create-admin": "cross-env NODE_ENV=development ts-node src/scripts/create-admin.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "files": [
+    "dist"
+  ],
+  "license": "ISC",
+  "devDependencies": {
+    "@types/bcrypt": "^5.0.2",
+    "@types/cors": "^2.8.17",
+    "@types/express": "^4.17.21",
+    "@types/jsonwebtoken": "^9.0.7",
+    "@types/node": "^22.7.4",
+    "nodemon": "^3.1.4",
+    "ts-node": "^10.9.2",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.6.2"
+  },
+  "dependencies": {
+    "@common/shared-types": "workspace:*",
+    "@common/utils": "workspace:*",
+    "bcrypt": "^5.1.1",
+    "cors": "^2.8.5",
+    "cross-env": "^7.0.3",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.0",
+    "firebase-admin": "^12.5.0",
+    "jsonwebtoken": "^9.0.2",
+    "winston": "^3.14.2",
+    "zod": "^3.23.8"
+  },
+  "prettier": {
+    "arrowParens": "always",
+    "bracketSpacing": true,
+    "endOfLine": "lf",
+    "printWidth": 90,
+    "htmlWhitespaceSensitivity": "css",
+    "insertPragma": false,
+    "singleAttributePerLine": false,
+    "tabWidth": 2,
+    "jsxSingleQuote": false,
+    "proseWrap": "preserve",
+    "quoteProps": "as-needed",
+    "requirePragma": false,
+    "semi": false,
+    "singleQuote": true,
+    "trailingComma": "es5",
+    "useTabs": false,
+    "parser": "typescript"
+  }
+}
